@@ -1,0 +1,55 @@
+description: Genera contenido, branding y despliegue inicial para ClonePilot desde
+  un JSON tipo dry-run.
+input_schema:
+  properties:
+    branding:
+      type: object
+    content:
+      type: object
+    domain:
+      type: string
+    output:
+      type: object
+    startup_name:
+      type: string
+    template_base:
+      type: string
+    wordpress_multisite_url:
+      type: string
+  required:
+  - startup_name
+  - domain
+  - template_base
+  - branding
+  - content
+  - output
+  type: object
+model: openai/gpt-4-turbo
+name: ClonePilot Generator
+output_example:
+  brand_name: ClonePilot
+  hero_text: "Redise\xF1a tu landing con un solo clic."
+  logo_prompt: "Dise\xF1a un logotipo tech minimalista para ClonePilot..."
+  technical_summary: Este flujo crea una nueva landing basada en home13 usando WP-CLI
+    y Neorus...
+  video_script: "Hola, bienvenido a ClonePilot. \xBFTu sitio web necesita una transformaci\xF3\
+    n? Con un solo clic..."
+  wp_cli_payload:
+    media:
+    - logo
+    - video
+    plugins:
+    - elementor
+    - rank-math
+    site: clonepilot.io
+    theme: home13
+prompt: "Eres un asistente para lanzar startups autom\xE1ticamente. Con base en la\
+  \ siguiente configuraci\xF3n de `dryrun`, genera:\n\n1. Un nombre de marca optimizado\
+  \ (si no es definitivo).\n2. Un texto para la secci\xF3n principal (hero) de la\
+  \ landing.\n3. Un guion para un video explicativo corto (m\xE1x. 60 segundos).\n\
+  4. Un prompt para generaci\xF3n de logo IA.\n5. El JSON final para disparar la creaci\xF3\
+  n de una landing WordPress (home13), usando WP-CLI.\n6. Un resumen ejecutivo para\
+  \ el equipo t\xE9cnico.\n\nEntrada:\n```json\n{{input}}\n```\n\nSalida (estructura\
+  \ JSON):\n```json\n{\n  \"brand_name\": \"...\",\n  \"hero_text\": \"...\",\n  \"\
+  video_script\": \"...\",\n  \"logo_prompt\": \"...\",\n  \"wp_cli_payload\": { ...\
+  \ },\n  \"technical_summary\": \"...\"\n}\n```\n"
